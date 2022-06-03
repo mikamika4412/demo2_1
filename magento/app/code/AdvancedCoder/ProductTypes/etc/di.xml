@@ -1,0 +1,55 @@
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="mika\ProductTypes\Api\Data\ProductTypesInterface" type="mika\ProductTypes\Model\ProductTypes"/>
+    <preference for="mika\ProductTypes\Api\ProductTypesRepositoryInterface" type="mika\ProductTypes\Model\ProductTypesRepository"/>
+    <preference for="mika\ProductTypes\Api\ProductTypesSearchResultInterface" type="mika\ProductTypes\Model\ProductTypesSearchResult"/>
+    <type name="Magento\InventoryApi\Api\SourceRepositoryInterface">
+        <plugin name="source_repository_plugin" type="AdvancedCoder\ProductTypes\Plugin\SourceRepositoryPlugin" sortOrder="1" disabled="false" />
+    </type>
+    <type name="Magento\Framework\Console\CommandList">
+        <arguments>
+            <argument name="commands" xsi:type="array">
+                <item name="SetProductTypeForProduct" xsi:type="object">mika\ProductTypes\Console\Command\SetProductTypeForProduct</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="mika\ProductTypes\Console\Command\SetProductTypeForProduct">
+        <arguments>
+            <argument name="helper" xsi:type="object">mika\ProductTypes\Console\Command\Helper\SetProductTypeForProductHelper\Proxy</argument>
+        </arguments>
+    </type>
+
+    <virtualType name="mika\ProductTypes\Model\Logger\VirtualDebug" type="Magento\Framework\Logger\Handler\Base">
+        <arguments>
+            <argument name="fileName" xsi:type="string">/var/log/AdvancedCoder/log.log</argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="mika\ProductTypes\Model\Logger\Logger" type="Magento\Framework\Logger\Monolog">
+        <arguments>
+            <argument name="handlers" xsi:type="array">
+                <item name="debug" xsi:type="object">mika\ProductTypes\Model\Logger\VirtualDebug</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <type name="mika\ProductTypes\Model\CustomLogger">
+        <arguments>
+            <argument name="logger" xsi:type="object">mika\ProductTypes\Model\Logger\Logger</argument>
+        </arguments>
+    </type>
+
+    <type name="Magento\Framework\Console\CommandList">
+        <arguments>
+            <argument name="commands" xsi:type="array">
+                <item name="SetProductTypeForProduct" xsi:type="object">mika\ProductTypes\Console\Command\CreateCategory</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="mika\ProductTypes\Console\Command\SetProductTypeForProduct">
+        <arguments>
+            <argument name="helper" xsi:type="object">mika\ProductTypes\Console\Command\Helper\AddCategoryHelper\Proxy</argument>
+        </arguments>
+    </type>
+</config>

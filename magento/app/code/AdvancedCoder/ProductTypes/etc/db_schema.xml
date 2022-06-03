@@ -1,0 +1,21 @@
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="mika_product_types" resource="default" engine="innodb" comment="Product Types Table">
+        <column xsi:type="int" name="entity_id" unsigned="true" nullable="false" identity="true"
+                comment="Entity ID"/>
+        <column xsi:type="varchar" name="type" nullable="false" length="64" comment="Type"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="entity_id"/>
+        </constraint>
+        <constraint xsi:type="unique" referenceId="Unique">
+            <column name="type"/>
+        </constraint>
+    </table>
+
+    <table name="catalog_product_entity">
+        <column xsi:type="int" name="product_type_id" nullable="true" comment="Product Type"/>
+    </table>
+
+    <table name="inventory_source">
+        <column xsi:type="int" name="product_type_id" nullable="true" comment="Notes about working hours"/>
+    </table>
+</schema>

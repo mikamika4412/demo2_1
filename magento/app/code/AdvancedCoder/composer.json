@@ -1,0 +1,11 @@
+{
+    "name": "first-developer-com/magento-module-product-types",
+    "description": "Test module",
+    "minimum-stability": "stable",
+    "type": "magento2-module",
+    "license": "proprietary",
+    "require": {
+        "magento/magento-composer-installer": "*"
+    }
+}
+
